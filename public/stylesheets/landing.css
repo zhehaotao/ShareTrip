@@ -1,0 +1,20 @@
+body {
+    /* background-color: #000; */
+    background-image: url('http://i.imgur.com/K3mPv14.jpg');
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+  }
+  
+#landing-header {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding-top: 40vh;
+}
+  
+ #landing-header h1 {
+    color: rgb(0, 0, 0);
+ }
+  
+
+

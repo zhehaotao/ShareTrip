@@ -1,0 +1,144 @@
+<%- include("../partials/header") %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <p class="lead">ShareTrip</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item ">Info 2</li>
+                <li class="list-group-item ">Info 3</li>
+            </div>
+            <div id="map"></div>
+            <a class="btn btn-primary mt-4" href="/trips">Go Back</a>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card bg-light mt-3">
+                <img src="<%=trip.image %>" class="card-img-top">
+                <div class="card-body">
+                    <p class="float-right">Cost: $<%=trip.price%></p>
+                    <h5 class="card-title"><%=trip.name%></h5>
+                    <p><em>Submitted By <%= trip.author.username%>, <%= moment(trip.createdAt).fromNow()%></em></p>
+                    
+                    <div class="float-right">
+                        <button class="btn btn-primary" data-toggle="modal"
+                                data-target="#tripLikes">
+                            <span>Total likes: <i class="far fa-heart"></i> <%= trip.likes.length %></span>
+                        </button>
+                    </div>
+                    <div style="padding-bottom: 10px;">
+                        <form action="/trips/<%= trip._id %>/like" method="POST">
+                            <!-- <div class="btn-group"> -->
+                                <% if (currentUser && trip.likes.some(function (like) {
+                                    return like.equals(currentUser._id)
+                                })) { %>
+                                <button class="btn btn-danger mr-2">
+                                    <i class="far fa-heart"></i> Liked
+                                </button>
+                                <% } else { %>
+                                <button class="btn btn-secondary mr-2">
+                                    <i class="far fa-heart"></i> Like
+                                </button>
+                                <% } %>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#tripLikes">See more details
+                                </button>
+                            <!-- </div> -->
+                        </form>
+                    </div>
+
+                    <hr>
+                    <p class="card-text"><%=trip.description %></p>
+                   
+                    <%if (currentUser && trip.author.id.equals(currentUser._id)){%>
+                        <a class="btn btn-warning" href="/trips/<%=trip._id%>/edit ">Edit</a>
+                        <form class="delete-form" action="/trips/<%=trip._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    <%}%>
+                </div>
+            </div>
+
+            <div class="card bg-light mt-3 mb-3">
+                <div class="card-header">
+                    <div class="float-right">
+                        <a href="/trips/<%=trip._id%>/comments/new" class="btn btn-success">Add New Comment</a>
+                    </div>
+                    <h5 class="float-left mt-1">Comments</h5>
+                </div>
+                <div class="card-body text-dark">                    
+                    <% trip.comments.forEach(function(comment){ %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong><%= comment.author.username%></strong> 
+                                <span class="float-right"><em><%= moment(comment.createdAt).fromNow()%></em></span>
+                                <p><%= comment.text %></p>
+                                <%if (currentUser && comment.author.id.equals(currentUser._id)){%>
+                                    <a class="btn btn-sm btn-warning" href="/trips/<%=trip._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                                    <form class="delete-form" action="/trips/<%=trip._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                    <input type="submit" class="btn btn-sm btn-danger" value="Delete"></form>
+                                <%}%>
+                                <hr>
+                            </div>
+                        </div>          
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trip Likes Modal -->
+<div id="tripLikes" class="modal fade">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Trip likes: <%= trip.likes.length %></h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Liked by:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% trip.likes.forEach(function(like) { %>
+                        <tr>
+                            <td><span class="badge"><i class="fas fa-user"></i></span> <%= like.username %></td>
+                        </tr>
+                    <% }); %>
+                    <% if (trip.likes.length === 0) { %>
+                        <tr>
+                            <td><em>No likes yet.</em></td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var lat = <%=trip.lat%>;
+    var lng = <%=trip.lng%>;
+    L.mapquest.key = '<%= process.env.MAPQUEST_API_KEY %>';
+    L.mapquest.open = true;
+    // 'map' refers to a <div> element with the ID map
+    var map = L.mapquest.map('map', {
+    center: [lat,lng],
+    // L.mapquest.tileLayer('map') is the MapQuest map tile layer
+    layers: L.mapquest.tileLayer('map'),
+    zoom: 16
+    });
+    L.marker([lat,lng], { icon: L.mapquest.icons.marker() }).addTo(map);
+</script>
+
+
+<%- include("../partials/footer") %>

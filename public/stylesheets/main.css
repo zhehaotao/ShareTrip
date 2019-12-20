@@ -1,0 +1,61 @@
+.form {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+  }
+
+.form .checkbox {
+    font-weight: 400;
+  }
+.form .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+.form .form-control:focus {
+    z-index: 2;
+  }
+
+.tripform {
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+  }
+
+.tripform .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 6px;
+    font-size: 16px;
+  }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.delete-form{
+    /* display: inline; */
+    float: right;
+}
+
+.form-group .form-control{
+  width: 450px;
+  margin-right: 10px;
+  padding: 15px;
+}
+
+.badge{
+  font-size: large;
+  margin-bottom: 6px;
+}
+
+#map{
+  margin-top: 20px;
+  height: 300px;
+  width: 100%;
+}

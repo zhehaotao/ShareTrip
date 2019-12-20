@@ -1,0 +1,14 @@
+<%- include("./partials/header") %>
+
+<div class="text-center">
+    <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+    <form class="form" action="/register" method="POST">
+        
+        <input class="form-control" type="text" name="username" placeholder="username">
+        <input class="form-control" type="password" name="password" placeholder="password">
+        <button class="btn btn-lg btn-primary btn-block">Sign up</button>
+    </form>
+    <a href="/trips">Go back</a>
+</div>
+
+<%- include("./partials/footer") %>
