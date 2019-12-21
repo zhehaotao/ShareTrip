@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <p class="float-right">Cost: $<%=trip.price%></p>
                     <h5 class="card-title"><%=trip.name%></h5>
-                    <p><em>Submitted By <%= trip.author.username%>, <%= moment(trip.createdAt).fromNow()%></em></p>
+                    <p><em>Submitted By <a href="/users/<%= trip.author.id%>"><%= trip.author.username%></a>, <%= moment(trip.createdAt).fromNow()%></em></p>
                     
                     <div class="float-right">
                         <button class="btn btn-primary" data-toggle="modal"
@@ -135,7 +135,7 @@
     center: [lat,lng],
     // L.mapquest.tileLayer('map') is the MapQuest map tile layer
     layers: L.mapquest.tileLayer('map'),
-    zoom: 16
+    zoom: 12
     });
     L.marker([lat,lng], { icon: L.mapquest.icons.marker() }).addTo(map);
 </script>
