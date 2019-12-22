@@ -1,21 +1,18 @@
 <%- include("../partials/header") %>
 
-<div class="container">
-    <header class="jumbotron">
-        <div class="container">
-            <h1>Welcome to ShareTrip!</h1>
-            <p>View amazing trips from all over the world</p>
-            <p><a class="btn btn-primary btn-lg" href="/trips/new">Add New Trip</a></p>
-            <p>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <input type="text" name="search" placeholder="Trip search..." class="form-control">                       
-                    </div>
-                    <input type="submit" value="Search" class="btn btn-dark">
-                </form>
-            </p>
-        </div>   
-    </header>     
+<div class="container" id="show-image">
+    <div class="card bg-dark text-white">
+        <img src='https://images.pexels.com/photos/356830/pexels-photo-356830.jpeg?cs=srgb&dl=architecture-bay-bridge-356830.jpg&fm=jpg' class="card-img" style="height: 350px;">
+        <div class="card-img-overlay">
+          <h5 class="card-title" style="padding-top:40px">Welcome to ShareTrip!</h5>
+          <p class="card-text">View amazing trips from all over the world</p>
+          <p><a class="btn btn-primary btn-lg" href="/trips/new">Add New Trip</a></p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="min-height:40vh">     
     <div class="row text-center">
         <%trips.forEach((trip)=>{ %> 
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">

@@ -49,6 +49,10 @@
   padding: 15px;
 }
 
+#search{
+  width: 200px;
+}
+
 .badge{
   font-size: large;
   margin-bottom: 6px;
@@ -66,4 +70,24 @@
   width: 100%;
   height: 30px;
   background-color: #f5f5f5;
+}
+
+.container .card-img-overlay{
+  font-family: 'Indie Flower';
+  margin-bottom:6px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 32px;
+}
+
+#show-image{
+  margin-bottom: 24px;
+}
+
+.card-img-overlay h5{
+  font-size: 72px;
+}
+
+.card-img-overlay .btn{
+  font-family: 'Lato', sans-serif;
 }

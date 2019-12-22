@@ -109,15 +109,32 @@ router.get("/new",middleware.isLoggedIn,(req,res)=>{
 
 // show route
 router.get("/:id",function(req,res){
-    Trip.findById(req.params.id).populate("comments likes").exec(function(err,foundTrip){
-        if (err || !foundTrip){
-            req.flash("error", "Trip not found");
-            res.redirect("back")
-            console.log(err);
-        }else{
-            res.render("trips/show",{trip:foundTrip})
-        }
-    })
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Trip.find({name:regex},function(err,allTrips){
+            if (err){
+                console.log(err);
+            }else{
+                if (allTrips.length < 1){
+                    return res.render("trips/index", {trips:allTrips, currentUser:req.user, error: "No trips match that query, please try again."});
+                } else {
+                    res.render("trips/index",{trips:allTrips, currentUser:req.user})
+                }
+               
+            }
+        })
+    } else{
+        Trip.findById(req.params.id).populate("comments likes").exec(function(err,foundTrip){
+            if (err || !foundTrip){
+                req.flash("error", "Trip not found");
+                res.redirect("back")
+                console.log(err);
+            }else{
+                res.render("trips/show",{trip:foundTrip})
+            }
+        })
+    }
+
 })
 
 router.post("/:id/like", middleware.isLoggedIn, function (req, res) {
