@@ -1,36 +1,38 @@
 <%- include("../partials/header") %>
 
 <div class="container" id="show-image">
-    <div class="card bg-dark text-white">
-        <img src='https://images.pexels.com/photos/2832043/pexels-photo-2832043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' class="card-img" >
-        <div class="card-img-overlay">
-          <h5 class="card-title">Welcome to ShareTrip!</h5>
-          <p class="card-text">View amazing trips from all over the world</p>
-          <a class="btn btn-primary" href="/trips/new">Add New Trip</a>
-        </div>
+  <div class="card bg-dark text-white">
+    <img
+      src='https://images.pexels.com/photos/2832043/pexels-photo-2832043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+      class="card-img">
+    <div class="card-img-overlay">
+      <h5 class="card-title">Welcome to ShareTrip!</h5>
+      <p class="card-text">View amazing trips from all over the world</p>
+      <a class="btn btn-primary" href="/trips/new">Add New Trip</a>
     </div>
+  </div>
 </div>
 
 
-<div class="container" style="min-height:40vh">     
-    <div class="row text-center">
-        <%trips.forEach((trip)=>{ %> 
-        <div class="col-lg-3 col-md-6">
-            <div class="card bg-light mb-4">
-                <div class="col-md-3 col-sm-6"></div>                     
-                <img src="<%=trip['image']%>" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title"><%=trip["name"]%></h5>
-                    <div>
-                        <span class="badge badge-danger mb-0"><i class="far fa-heart"></i> <%= trip.likes.length %></span>
-                    </div>
-                    <hr>
-                    <a href="/trips/<%= trip['_id']%>" class="btn btn-primary">More Info</a>
-                </div>         
-            </div>
+<div class="container" style="min-height:40vh">
+  <div class="row text-center">
+    <%trips.forEach((trip)=>{ %>
+    <div class="col-lg-3 col-md-6">
+      <div class="card bg-light mb-4">
+        <div class="col-md-3 col-sm-6"></div>
+        <img src="<%=trip['image']%>" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title"><%=trip["name"]%></h5>
+          <div>
+            <span class="badge badge-danger mb-0"><i class="far fa-heart"></i> <%= trip.likes.length %></span>
+          </div>
+          <hr>
+          <a href="/trips/<%= trip['_id']%>" class="btn btn-primary">More Info</a>
         </div>
-        <% })%>
+      </div>
     </div>
+    <% })%>
+  </div>
 </div>
 
 <%- include("../partials/footer") %>

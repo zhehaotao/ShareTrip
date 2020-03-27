@@ -1,22 +1,19 @@
 body {
-    /* background-color: #000; */
-    background-image: url("https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?cs=srgb&dl=trees-in-park-257360.jpg&fm=jpg");
-    background-repeat:no-repeat; 
-    background-size:100% 100%;
-  }
-  
-#landing-header {
-    z-index: 1;
-    position: relative;
-    text-align: center;
-    padding-top: 40vh;
-    font-family: 'Lato', sans-serif;
+  /* background-color: #000; */
+  background-image: url("https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?cs=srgb&dl=trees-in-park-257360.jpg&fm=jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
-  
- #landing-header h1 {
-    color: rgb(227, 249, 250);
-    font-size: 52px;
- }
-  
 
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+  font-family: 'Lato', sans-serif;
+}
 
+#landing-header h1 {
+  color: rgb(227, 249, 250);
+  font-size: 52px;
+}
