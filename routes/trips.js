@@ -39,41 +39,54 @@ var upload = multer({
 });
 
 // index route
-router.get("/", (req, res) => {
+router.get("/", function (req, res) {
+  var perPage = 8;
+  var pageQuery = parseInt(req.query.page);
+  var pageNumber = pageQuery ? pageQuery : 1;
+  var noMatch = null;
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
     Trip.find({
       name: regex
-    }, function (err, allTrips) {
-      if (err) {
-        console.log(err);
-      } else {
-        if (allTrips.length < 1) {
-          return res.render("trips/index", {
+    }).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allTrips) {
+      Trip.count({
+        name: regex
+      }).exec(function (err, count) {
+        if (err) {
+          console.log(err);
+          res.redirect("back");
+        } else {
+          if (allTrips.length < 1) {
+            noMatch = "No trips match that query, please try again.";
+          }
+          res.render("trips/index", {
             trips: allTrips,
-            currentUser: req.user,
-            error: "No trips match that query, please try again."
+            current: pageNumber,
+            pages: Math.ceil(count / perPage),
+            noMatch: noMatch,
+            search: req.query.search
           });
+        }
+      });
+    });
+  } else {
+    // get all trips from DB
+    Trip.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allTrips) {
+      Trip.count().exec(function (err, count) {
+        if (err) {
+          console.log(err);
         } else {
           res.render("trips/index", {
             trips: allTrips,
-            currentUser: req.user
-          })
+            current: pageNumber,
+            pages: Math.ceil(count / perPage),
+            noMatch: noMatch,
+            search: false
+          });
         }
-      }
-    })
-  } else {
-    Trip.find({}, function (err, allTrips) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("trips/index", {
-          trips: allTrips,
-          currentUser: req.user
-        })
-      }
-    })
-  } // res.render("trips",{trips:trips})
+      });
+    });
+  }
 });
 
 // create route

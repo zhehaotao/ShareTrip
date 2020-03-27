@@ -125,8 +125,8 @@
 </div>
 
 <script>
-  var lat = < %= trip.lat % > ;
-  var lng = < %= trip.lng % > ;
+  var lat = <%= trip.lat %> ;
+  var lng = <%= trip.lng %> ;
   L.mapquest.key = '<%= process.env.MAPQUEST_API_KEY %>';
   L.mapquest.open = true;
   // 'map' refers to a <div> element with the ID map
