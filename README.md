@@ -15,7 +15,7 @@ Share your amazing trip on this full-functional website. You can upload photo fr
 * Search bar allows user to have fuzzy search by name and returns all trips match it.
 * User homepage displays all the trips he/she have created.
 * Like button shows how much people like this trip.
-* Pagination on campgrounds index
+* Pagination on index trip page.
 
 ## Built-with
 
