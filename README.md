@@ -1,5 +1,9 @@
 # Share Trip
 
+![index page](https://github.com/zhehaotao/Share-Trip/blob/master/public/pages/index%20page.png)
+
+![show page](https://github.com/zhehaotao/Share-Trip/blob/master/public/pages/show%20page.png)
+
 Share your amazing trip on this full-functional website. You can upload photo from your phone, pad or computer and write feelings about this trip. You can also "like" and  comment on other people's trip. Come and join our great community to share and make friends.
 
 ## Get started
